@@ -1,0 +1,29 @@
+{
+  "list": {
+    "products": [
+      {
+        "name": "mobile",
+        "manufacturers": [
+          {
+            "name": "Apple",
+            "models": [
+              {
+                "name": "5s",
+                "img": "5s.png",
+                "title": "",
+                "data": {
+                  "name": "One",
+                  "cost": "30UAH"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "computers",
+        "computers": {}
+      }
+    ]
+  }
+}

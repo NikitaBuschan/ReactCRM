@@ -1,5 +1,4 @@
-import { async } from "@firebase/util";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getCategories } from "../../firebase.js";
 
@@ -10,11 +9,10 @@ export default function Products() {
 
   const getProducts = async () => {
     try {
-      await getCategories()
-      .then((data) => {
+      await getCategories().then((data) => {
         let newList = [];
 
-        data.forEach(el => {
+        data.forEach((el) => {
           newList.push(el.id);
         });
 
@@ -23,7 +21,7 @@ export default function Products() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getProducts();
@@ -32,13 +30,7 @@ export default function Products() {
   return (
     <StyledProducts>
       Products
-      {list
-        ? list.map((el, index) => (
-            <button key={index}>
-              {el}
-            </button>
-          ))
-        : ""}
+      <ul>{list ? list.map((el, index) => <li key={index}>{el}</li>) : ""}</ul>
     </StyledProducts>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getCollection } from "../../firebase.js";
 
 const StyledSidePannel = styled.div`
   display: flex;
@@ -11,20 +12,19 @@ const StyledSidePannel = styled.div`
 `;
 
 export default function SidePannel() {
-  const [categories, setCategories] = useState();
+  const [categories, setCategoryes] = useState();
 
   const getCategories = async () => {
     try {
-      await fetch("/mock/state.json", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setCategories(data.list.products);
+      await getCollection().then((data) => {
+        let newList = [];
+
+        data.forEach((el) => {
+          newList.push(el);
         });
+
+        setCategoryes(newList);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -38,8 +38,8 @@ export default function SidePannel() {
     <StyledSidePannel>
       {categories
         ? categories.map((el, index) => (
-            <button category={el.manufacturers} key={index}>
-              {el.name}
+            <button category={el.index} key={index}>
+              {el.id}
             </button>
           ))
         : ""}

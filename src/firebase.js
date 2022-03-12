@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, ref, push, set } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-shvU57TOaMmjMWjnbGPoJCLg5jNVcXI",
@@ -8,22 +8,31 @@ const firebaseConfig = {
   projectId: "reactcrm-a6bb5",
   storageBucket: "reactcrm-a6bb5.appspot.com",
   messagingSenderId: "235898438632",
-  appId: "1:235898438632:web:b20c450ad95569e6e99a5d"
+  appId: "1:235898438632:web:b20c450ad95569e6e99a5d",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// Get categoryes from db
-export async function getCategories() {
-  const q = query(collection(db, "categories"));
+export async function getCollection(name) {
+  return getDocs(query(collection(db, name)));
+}
 
-  const querySnapshot = await getDocs(q);
-  // querySnapshot.forEach((doc) => {
-  //   // doc.data() is never undefined for query doc snapshots
-  //   console.log(doc.id);
-  // });
+export async function CreateNewMobile() {
+  const mobileList = ref(db, 'mobile');
+  const newMobile = push()
+}
 
-  return querySnapshot;
+var products = [];
+
+async function getAllProducts(name) {
+  var res = await getCollection(name);
+  if (res.empty) {
+    products.push(name);
+    return;
+  }
+  res.docs.forEach((el) => {
+    getAllProducts(el.id);
+  });
 }

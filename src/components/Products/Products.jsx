@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getCategories } from "../../firebase.js";
+import { getCollection } from "../../firebase.js";
 
 const StyledProducts = styled.div``;
 
 export default function Products() {
-  const [list, setList] = useState();
+  const [products, setProducts] = useState();
 
   const getProducts = async () => {
     try {
-      await getCategories().then((data) => {
+      await getCollection("categories").then((data) => {
         let newList = [];
 
         data.forEach((el) => {
           newList.push(el.id);
         });
 
-        setList(newList);
+        setProducts(newList);
       });
     } catch (error) {
       console.log(error);
@@ -30,7 +30,7 @@ export default function Products() {
   return (
     <StyledProducts>
       Products
-      <ul>{list ? list.map((el, index) => <li key={index}>{el}</li>) : ""}</ul>
+      {/* <ul>{list ? list.map((el, index) => <li key={index}>{el}</li>) : ""}</ul> */}
     </StyledProducts>
   );
 }

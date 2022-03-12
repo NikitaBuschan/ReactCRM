@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query, ref, push, set } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-shvU57TOaMmjMWjnbGPoJCLg5jNVcXI",
@@ -19,20 +19,15 @@ export async function getCollection(name) {
   return getDocs(query(collection(db, name)));
 }
 
-export async function CreateNewMobile() {
-  const mobileList = ref(db, 'mobile');
-  const newMobile = push()
-}
+// var products = [];
 
-var products = [];
-
-async function getAllProducts(name) {
-  var res = await getCollection(name);
-  if (res.empty) {
-    products.push(name);
-    return;
-  }
-  res.docs.forEach((el) => {
-    getAllProducts(el.id);
-  });
-}
+// async function getAllProducts(name) {
+//   var res = await getCollection(name);
+//   if (res.empty) {
+//     products.push(name);
+//     return;
+//   }
+//   res.docs.forEach((el) => {
+//     getAllProducts(el.id);
+//   });
+// }

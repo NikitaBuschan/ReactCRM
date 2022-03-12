@@ -16,7 +16,7 @@ export default function SidePannel() {
 
   const getCategories = async () => {
     try {
-      await getCollection().then((data) => {
+      await getCollection("categories").then((data) => {
         let newList = [];
 
         data.forEach((el) => {

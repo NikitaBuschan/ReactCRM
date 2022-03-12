@@ -21,7 +21,7 @@ export async function getCollection(name) {
 
 export async function CreateNewMobile() {
   const mobileList = ref(db, 'mobile');
-  const newMobile = pusj
+  const newMobile = push()
 }
 
 var products = [];
